@@ -1,7 +1,6 @@
 from pages.auth_page import AuthLocators
 from settings import user_config
 
-
 def test_correct_auth(fixture_tools):
     fixture_tools.auth_page.input_login(AuthLocators.USERNAME, user_config.user_login)
     fixture_tools.auth_page.input_password(AuthLocators.PASSWORD, user_config.user_password)
