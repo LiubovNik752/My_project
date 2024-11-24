@@ -18,7 +18,13 @@ jobs:
         run: pip install -r requirements.txt
       - name: install dependencies for Playwright
         run: sudo apt-get install -y libnss3 libgconf-2-4 libxss1 libasound2
+      - name: Clear Playwright cache
+        run: rm -rf ~/.cache/ms-playwright
       - name: Install Playwright browsers
         run: npx playwright install
+      - name: Check Playwright version
+        run: python -m playwright --version
+      - name: List installed browsers
+        run: python -m playwright show-browsers
       - name: Run test
         run: pytest
