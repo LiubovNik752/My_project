@@ -13,7 +13,8 @@ def browser():
         После выполнения тестов браузер закрывается.
     """
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True, args=["--start-maximized"])
+        # browser = p.chromium.launch(headless=False, args=["--start-maximized"])
+        browser = p.chromium.launch(headless=True)
         yield browser
         browser.close()
 
