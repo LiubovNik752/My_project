@@ -15,7 +15,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install Playwright browsers
-        run: npx playwright install
+        run: sudo apt-get playwright install
       - name: install dependencies
         run: pip install -r requirements.txt
       - name: Run test
