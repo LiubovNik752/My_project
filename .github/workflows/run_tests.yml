@@ -22,9 +22,5 @@ jobs:
         run: rm -rf ~/.cache/ms-playwright
       - name: Install Playwright browsers
         run: npx playwright install
-      - name: Check Playwright version
-        run: python -m playwright --version
-      - name: List installed browsers
-        run: python -m playwright show-browsers
       - name: Run test
         run: pytest
