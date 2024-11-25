@@ -23,7 +23,7 @@ jobs:
         run: python -m playwright install --with-deps
 
       - name: Run tests with credentials
-        uses:
+        env:
           with:
             BASE_URL: ${{ secrets.BASE_URL }}
             LOCKED_USER_LOGIN: ${{ secrets.LOCKED_USER_LOGIN }}
