@@ -20,7 +20,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Install Playwright and dependencies
-        run: python -m playwright install --with-deps
+        run: python -m playwright install chromium --with-deps
 
       - name: Run tests with credentials
         env:
