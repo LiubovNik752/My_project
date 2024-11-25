@@ -24,11 +24,12 @@ jobs:
 
       - name: Run tests with credentials
         env:
-          BASE_URL: ${{ secrets.BASE_URL }}
-          LOCKED_USER_LOGIN: ${{ secrets.LOCKED_USER_LOGIN }}
-          USER_LOGIN: ${{ secrets.USER_LOGIN }}
-          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-        run: pytest
+          with:
+            BASE_URL: ${{ secrets.BASE_URL }}
+            LOCKED_USER_LOGIN: ${{ secrets.LOCKED_USER_LOGIN }}
+            USER_LOGIN: ${{ secrets.USER_LOGIN }}
+            USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+          run: pytest
 
-      - name: Run tests
-        run: pytest
+#      - name: Run tests
+#        run: pytest
