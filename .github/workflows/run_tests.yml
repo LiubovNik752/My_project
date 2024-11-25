@@ -1,0 +1,33 @@
+name: Automated tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install Playwright and dependencies
+        run: python -m playwright install chromium --with-deps
+
+      - name: Run tests with credentials
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          LOCKED_USER_LOGIN: ${{ secrets.LOCKED_USER_LOGIN }}
+          USER_LOGIN: ${{ secrets.USER_LOGIN }}
+          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+        run: pytest
