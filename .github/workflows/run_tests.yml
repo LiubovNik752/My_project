@@ -22,11 +22,13 @@ jobs:
       - name: Install Playwright and dependencies
         run: python -m playwright install --with-deps
 
-      - name: Use BASE_URL secret
+      - name: Run tests with credentials
         env:
-          BASE_URL: ${{ secrets.BASE_URL }}
-        run: |
-          echo "Using BASE_URL: $BASE_URL"
+          BASE_URL: {{ secrets.BASE_URL }}
+          LOCKED_USER_LOGIN: ${{ secrets.LOCKED_USER_LOGIN }}
+          USER_LOGIN: ${{ secrets.USER_LOGIN }}
+          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+        run: pytest
 
       - name: Run tests
         run: pytest
