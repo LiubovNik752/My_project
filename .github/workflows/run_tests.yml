@@ -10,24 +10,23 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: setup Python
+
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-      - name: install dependencies
+
+      - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Ensure browsers are installed
+
+      - name: Install Playwright and dependencies
         run: python -m playwright install --with-deps
-      - name: install dependencies for Playwright
-        run: sudo apt-get install -y libnss3 libgconf-2-4 libxss1 libasound2
-      - name: Clear Playwright cache
-        run: rm -rf ~/.cache/ms-playwright
-      - name: Install Playwright Chromium
-        run: npx playwright install
-      - name: Run a script
+
+      - name: Use BASE_URL secret
         env:
-          MY_SECRET: ${{ secrets.BASE_URL }}
+          BASE_URL: ${{ secrets.BASE_URL }}
         run: |
-          echo "Using my secret: $BASE_URL"
-      - name: Run test
+          echo "Using BASE_URL: $BASE_URL"
+
+      - name: Run tests
         run: pytest
