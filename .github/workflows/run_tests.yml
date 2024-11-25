@@ -1,7 +1,9 @@
 name: Automated tests
 
 on:
-  push
+  push:
+    branches:
+      - main
 
 jobs:
   test:
@@ -29,6 +31,3 @@ jobs:
           USER_LOGIN: ${{ secrets.USER_LOGIN }}
           USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
         run: pytest
-
-#      - name: Run tests
-#        run: pytest
