@@ -161,3 +161,4 @@ cython_debug/
 results/
 config.py
 sql_file/
+allure_results
