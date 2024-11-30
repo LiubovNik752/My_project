@@ -61,3 +61,23 @@ class BasePage:
         elem = self.get_element(locator)
         self.logger.debug(f"Element with text '{elem.text_content()}' was found")
         expect(elem).to_contain_text(text)
+
+    def get_text_element(self, locator, num):
+        """ Получаем значение элемента. """
+        element = self.get_elements(locator)[num]
+        self.logger.debug(f"Element with locator {locator} was found")
+        value = element.text_content()
+        self.logger.debug(f"Element value is {value}")
+        return value
+
+    def get_by_role(self, role, name: str = None):
+        """ Получение элемента по роли и (опционально) имени. """
+        try:
+            if name:
+                element = self.page.get_by_role(role, name=name)
+            else:
+                element = self.page.get_by_role(role)
+            return element
+        except Exception as e:
+            self.logger.error(f"Ошибка при получении элемента по роли '{role}' и имени '{name}': {e}")
+            return None

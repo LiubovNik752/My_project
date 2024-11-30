@@ -3,6 +3,7 @@ from playwright.sync_api import Page, Playwright, sync_playwright, expect
 
 from configs.constants import DEFAULT_TIMEOUT
 from framework.fixture_tools import FixtureTools
+from pages.auth_page import AuthLocators
 from settings import user_config
 
 
@@ -20,9 +21,7 @@ def browser():
 
 @pytest.fixture(scope="function")
 def page(browser):
-    """
-        Фикстура для создания новой страницы в браузере.
-    """
+    """ Фикстура для создания новой страницы в браузере. """
     context = browser.new_context(no_viewport=True)
     page: Page = context.new_page()
     page.goto(user_config.base_url)
@@ -33,7 +32,12 @@ def page(browser):
 
 @pytest.fixture
 def fixture_tools(page: Page) -> FixtureTools:
-    """
-        Фикстура для создания экземпляра `FixtureTools`, используя объект страницы `page`
-    """
+    """ Фикстура для создания экземпляра `FixtureTools`, используя объект страницы `page` """
     return FixtureTools(page)
+
+@pytest.fixture
+def auth(fixture_tools, page):
+    """ Фикстура для авторизации в системе """
+    fixture_tools.auth_page.input_login(AuthLocators.USERNAME, user_config.user_login)
+    fixture_tools.auth_page.input_password(AuthLocators.PASSWORD, user_config.user_password)
+    fixture_tools.auth_page.login_button_click(AuthLocators.LOGIN_BUTTON)
