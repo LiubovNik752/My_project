@@ -1,5 +1,4 @@
 from pages.base_page import BasePage
-from settings import user_config
 from allure import step
 
 
